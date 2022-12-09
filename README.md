@@ -17,6 +17,7 @@ Syntax highlighted code block
 
 - Bulleted
 - List
+- hexo
 
 1. Numbered
 2. List
