@@ -3,6 +3,7 @@ layout: home
 
 title: Home
 
+
 hero:
   name: galaxy
   text: 风起于青萍之末
