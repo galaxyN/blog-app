@@ -21,6 +21,7 @@ jobs:
         with:
           version: 7.4.1
           run_install: false
+          auto-install-peers: true
       
       - name: Get pnpm store directory
         id: pnpm-cache
