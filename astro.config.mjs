@@ -7,5 +7,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	site: 'https://galaxyn.github.io/',
-	base: 'blog-app',
+	base: '',
 });
