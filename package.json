@@ -14,5 +14,9 @@
     "@astrojs/sitemap": "^3.4.1",
     "astro": "^5.10.0",
     "sharp": "^0.34.2"
+  },
+  "devDependencies": {
+    "less": "^4.3.0",
+    "less-loader": "^12.3.0"
   }
 }

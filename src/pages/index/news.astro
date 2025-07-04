@@ -1,0 +1,109 @@
+---
+const posts = [
+    {
+        imgUrl: '',
+        alt: 'Image 1',
+        classify: '技术开发',
+        title: '数据驱动的产品决策：从数据收集到行动洞察',
+        desc: '探讨如何建立完整的数据分析体系，实现精准的产品决策与优化。',
+        author: '赵明睿',
+        date: '2024-01-15',
+        views: 2345
+    },
+    {
+        imgUrl: '',
+        alt: 'Image 1',
+        classify: '技术开发',
+        title: '云原生架构设计：微服务的实践之路',
+        desc: '分享在大规模分布式系统中实施微服务架构的经验与最佳实践。',
+        author: '李子轩',
+        date: '2024-01-15',
+        views: 1936
+    }
+];
+---
+<div class="container">
+    <h4>最新文章</h4>
+    <ul>
+        {
+            posts.map((post,index) => (
+                    <li key={index} class="post-li">
+                        <img class="post-img" src={post.imgUrl} alt={post.alt} />
+                        <div class="content">
+                            <div class="label">{post.classify}</div>
+                            <h6>{post.title}</h6>
+                            <p>{post.desc}</p>
+                            <div class="info">
+                                <div class="info-left">
+                                    <span>{post.author}</span>
+                                    <span>{post.date}</span>
+                                </div>
+                                <div class="info-right">
+                                    <span class="icon iconfont icon-eye"></span>
+                                    <span>{post.views}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .container {
+        padding: 20px 0;
+        width: 1440px;
+        margin: 0 auto;
+        background: #f9fafb;
+        h4{
+            margin-left: 40px;
+        }
+        ul{
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            .post-li{
+                list-style: none;
+                cursor: pointer;
+                width: 684px;
+                height: 192px;
+                display: flex;
+                background: #fff;
+                border-radius: 12px;
+                .post-img{
+                    width: 228px;
+                    height: 192px;
+                }
+                .content{
+                    font-size: 16px;
+                    color: #4B5563;
+                    box-sizing: border-box;
+                    padding: 0 20px;
+                    .label{
+                        margin-top: 20px;
+                        color: #4B5563;
+                        background: #F3F4F6;
+                        font-size: 14px;
+                        padding: 0 10px;
+                        text-align: center;
+                        width: 80px;
+                        height: 28px;
+                        line-height: 28px;
+                    }
+                    h6{
+                        font-size: 18px;
+                        margin-top: 15px;
+                    }
+                    p{
+                        font-size: 14px;
+                    }
+                    .info{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+</style>

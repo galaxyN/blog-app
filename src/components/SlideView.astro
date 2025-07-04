@@ -1,0 +1,157 @@
+---
+// 导入图片
+import Image from '../assets/images/1.png';
+const images = [{
+    src: Image.src,
+    alt: 'Image 1'
+}, {
+    src: Image.src,
+    alt: 'Image 2'
+}, {
+    src: Image.src,
+    alt: 'Image 3'
+}]
+// 复制一份图片列表用于无缝滚动
+const duplicatedImages = [...images, ...images];
+---
+<div class="slide-view">
+    <div class="slide-view--container">
+        <div class="slide-view--items">
+            {
+                duplicatedImages.map((image) => (
+                        <img class="slide-view--item--img" src={image.src}  />
+                ))
+            }
+        </div>
+        <div class="slide-view--control">
+            {
+                images.map((image,index) => (
+                        <div class="slide-view--control--item"></div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style lang="less">
+  .slide-view {
+    &--container {
+      width: 100%;
+      position: relative;
+      .slide-view--items{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        overflow-x: hidden; /* 隐藏溢出内容 */
+        width: 1440px;
+        /* 隐藏滚动条，兼容 Chrome、Safari 和 Opera */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        /* 隐藏滚动条，兼容 Firefox */
+        scrollbar-width: none;
+        &--img{
+          width: 1440px;
+          height: 600px;
+        }
+      }
+      .slide-view--control{
+        position: absolute;
+        display: flex;
+        gap: 10px;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        &--item{
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #c4c7c9;
+          &.active{
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script is:inline>
+    console.log('你好，浏览器控制台！');
+    const fun1 = (e) => {
+        console.log(e)
+    }
+    function init(){
+        const slideViewItems = document.querySelector('.slide-view--items');
+        const slideViewControl = document.querySelector('.slide-view--control');
+        const slideViewControlItems = document.querySelectorAll('.slide-view--control--item');
+        const images = document.querySelectorAll('.slide-view--item--img');
+        const originalImageCount = images.length / 2; // 原始图片数量
+        let currentIndex = 0;
+        const itemWidth = 1440;
+
+        // 滚动处理函数
+        function scrollToIndex(index) {
+            slideViewItems.scrollTo({
+                left: index * itemWidth,
+                behavior: 'smooth'
+            });
+            // 更新控制项的激活状态
+            const controlIndex = index % originalImageCount;
+            slideViewControlItems.forEach((item, i) => {
+                item.classList.toggle('active', i === controlIndex);
+            });
+        }
+
+        // 自动滚动函数
+        function autoScroll() {
+            currentIndex++;
+            if (currentIndex === originalImageCount * 2) {
+                // 滚动到复制列表末尾时，瞬间跳转到原始列表开头
+                slideViewItems.style.transition = 'none';
+                slideViewItems.scrollLeft = 0;
+                currentIndex = 1;
+                setTimeout(() => {
+                    slideViewItems.style.transition = 'scroll-left 1s ease-in-out';
+                }, 0);
+            }
+            scrollToIndex(currentIndex);
+        }
+
+        images.forEach(image => {
+            console.log(image);
+            image.addEventListener('click', fun1);
+        });
+
+        slideViewItems.addEventListener('scroll', (e) => {
+            const scrollLeft = e.target.scrollLeft;
+            const index = Math.round(scrollLeft / itemWidth);
+            const controlIndex = index % originalImageCount;
+            slideViewControlItems.forEach((item, i) => {
+                item.classList.toggle('active', i === controlIndex);
+            });
+        });
+
+        slideViewControlItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                scrollToIndex(currentIndex);
+            });
+        });
+
+        // 启动自动滚动
+        // const intervalId = setInterval(autoScroll, 3000);
+
+        // // 鼠标悬停时暂停滚动
+        // slideViewItems.addEventListener('mouseenter', () => {
+        //     clearInterval(intervalId);
+        // });
+
+        // // 鼠标离开时恢复滚动
+        // slideViewItems.addEventListener('mouseleave', () => {
+        //     clearInterval(intervalId);
+        //     setInterval(autoScroll, 3000);
+        // });
+    }
+    init();
+</script>

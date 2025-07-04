@@ -1,0 +1,117 @@
+---
+import Image1 from '../../assets/images/class-1.png';
+
+const posts = [
+    {
+        imgUrl: '',
+        alt: 'Image 1',
+        classify: '技术开发',
+        title: '深入浅出：TypeScript4.0新特性解析与实战应用',
+        desc: '本文详细介绍了TypeScript4.0的重要更新，包括可变参数元祖类型、标记目标字面量类型等新特性的实际应用场景',
+        author: '张晨宇',
+        date: '2024-01-15',
+        views: 2345
+    },
+    {
+        imgUrl: '',
+        alt: 'Image 1',
+        classify: '设计创意',
+        title: '2024年UI设计趋势：极简主义的回归与创新',
+        desc: '探索新一年的设计趋势，从微动效到深色模式，从无界面设计到沉浸式体验，带您了解设计领域的最新动向',
+        author: '林雨晴',
+        date: '2024-01-14',
+        views: 1892
+    },
+    {
+        imgUrl: '',
+        alt: 'Image 1',
+        classify: '人工智能',
+        title: '基于实际案例，分析大语言模型在企业中的落地应用，探讨技术集成、成本控制与效果评估等关键问题。',
+        desc: '基于',
+        author: '王思远',
+        date: '2024-01-13',
+        views: 3167
+    }
+]
+---
+<div class="container">
+    <h4>热门推荐</h4>
+    <ul>
+        {
+            posts.map((post,index) => (
+                    <li key={index} class="post-li">
+                        <div class="image-box">
+                            <div class="label">{post.classify}</div>
+                            <img class="post-img" src={post.imgUrl} alt={post.alt} />
+                        </div>
+                        <div class="content">
+                            <h6>{post.title}</h6>
+                            <p>{post.desc}</p>
+                            <div class="info">
+                                <div class="info-left">
+                                    <span>{post.author}</span>
+                                    <span>{post.date}</span>
+                                </div>
+                                <div class="info-right">
+                                    <span class="icon iconfont icon-eye"></span>
+                                    <span>{post.views}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    .container {
+        padding: 20px 0;
+        width: 1440px;
+        margin: 0 auto;
+        h4{
+            margin-left: 40px;
+        }
+        ul{
+            display: flex;
+            justify-content: space-between;
+            .post-li{
+                list-style: none;
+                cursor: pointer;
+                width: 400px;
+                .image-box{
+                    position: relative;
+                    width: 448px;
+                    height: 192px;
+                    .label{
+                        position: absolute;
+                        top: 15px;
+                        left: 15px;
+                        color: #fff;
+                        background: #3B82F6;
+                        font-size: 13px;
+                        padding: 0 10px;
+                        text-align: center;
+                        height: 28px;
+                        line-height: 28px;
+                    }
+                    .post-img{
+                        width: 448px;
+                        height: 192px;
+                    }
+                }
+                .content{
+                    font-size: 16px;
+                    color: #4B5563;
+                    h6{
+                        font-size: 18px;
+                    }
+                    .info{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+            }
+        }
+    }
+</style>
